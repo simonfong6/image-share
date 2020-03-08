@@ -2,7 +2,7 @@
 """
 Python 3.8
 
-Combining Flask and AWS to upload files to S3.
+Uploading images to S3.
 """
 import mimetypes
 import os
@@ -15,7 +15,7 @@ from flask import request
 from werkzeug.utils import secure_filename
 
 
-BUCKET_NAME = 'my-boba-list'
+BUCKET_NAME = 'image-share-public'
 DIRECTORY = 'test'
 FILE_FORM_NAME = 'file'
 
@@ -78,7 +78,7 @@ def upload_file():
         return f'File uploaded successfully at <a href="{public_file_url}">{public_file_url}</a>'
 		
 if __name__ == '__main__':
-    port = 3034
+    port = 1343
     site_url = f'http://localhost:{port}/upload'
     print(f"Site starting at {site_url}")
     app.run(
