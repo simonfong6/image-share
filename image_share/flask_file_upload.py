@@ -9,7 +9,7 @@ import os
 import uuid
 
 import boto3
-from flask import Flask, render_template, request
+from flask import Flask
 from flask import render_template
 from flask import request
 from werkzeug.utils import secure_filename
@@ -76,6 +76,17 @@ def upload_file():
         public_file_url = f"https://{BUCKET_NAME}.s3-us-west-2.amazonaws.com/{key}"
         print(f"You should be able to access this file at {public_file_url}")
         return f'File uploaded successfully at <a href="{public_file_url}">{public_file_url}</a>'
+
+
+@app.route('/')
+def image_clipboard():
+    return app.send_static_file('index.html')
+
+
+@app.route('/upload-image')
+def image_clipboard_accept():
+    return "Image"
+
 		
 if __name__ == '__main__':
     port = 1343
