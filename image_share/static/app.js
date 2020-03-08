@@ -1,3 +1,34 @@
+function sendFileCallback(response) {
+	console.log(response);
+}
+
+function sendFileGivenFile(file) {
+	var formData = new FormData();
+	formData.append('file', file);
+
+	console.log(file);
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      sendFileCallback(xhr.response);
+    }
+	}
+
+	// Add any event handlers here...
+	xhr.open('POST', '/uploader', true);
+	xhr.send(formData);
+}
+
+function sendFile() {
+	console.log("Send Files");
+	// The Javascript
+	var fileInput = document.getElementById('the-file');
+	var file = fileInput.files[0];
+	sendFileGivenFile(file);
+}
+
 $(document).ready(function() {
 
 	var $content = $('.content');
@@ -60,6 +91,7 @@ $(document).ready(function() {
 		for (var i = 0; i < items.length; i++) {
 			if (IMAGE_MIME_REGEX.test(items[i].type)) {
 				loadImage(items[i].getAsFile()).done(copyImageInCanvas);
+				console.log(items[i].getAsFile());
 				return;
 			}
 			showMessage('No image found on your Clipboard!', true);
@@ -74,5 +106,4 @@ $(document).ready(function() {
 	});
 
 	$message.first().html('Copy your screen by pressing on the Print Screen key. Then paste (Ctrl+v) it here as an image.');
-
 });
