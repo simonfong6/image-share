@@ -8,6 +8,8 @@ function sendFileFromPaste() {
 
 function sendFileCallback(response) {
 	console.log(response);
+	var $imageUrl = $('#image-url');
+	$imageUrl.html(response);
 }
 
 function sendFileGivenFile(file) {
