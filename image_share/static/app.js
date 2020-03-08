@@ -1,3 +1,11 @@
+// Global image file.
+var IMAGE_FILE;
+
+function sendFileFromPaste() {
+	var file = IMAGE_FILE;
+	sendFileGivenFile(file);
+}
+
 function sendFileCallback(response) {
 	console.log(response);
 }
@@ -92,6 +100,9 @@ $(document).ready(function() {
 			if (IMAGE_MIME_REGEX.test(items[i].type)) {
 				loadImage(items[i].getAsFile()).done(copyImageInCanvas);
 				console.log(items[i].getAsFile());
+				var file = items[i].getAsFile();
+				IMAGE_FILE = file;
+				// sendFileGivenFile(file);
 				return;
 			}
 			showMessage('No image found on your Clipboard!', true);
