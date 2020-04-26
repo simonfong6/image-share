@@ -10,6 +10,7 @@ import uuid
 
 import boto3
 from flask import Flask
+from flask import jsonify
 from flask import render_template
 from flask import request
 from werkzeug.utils import secure_filename
@@ -75,7 +76,12 @@ def upload_file():
         print(f"Succesfully uploaded file as {key}")
         public_file_url = f"https://{BUCKET_NAME}.s3-us-west-2.amazonaws.com/{key}"
         print(f"You should be able to access this file at {public_file_url}")
-        return f'File uploaded successfully at <a href="{public_file_url}">{public_file_url}</a>'
+
+        response = {
+            'url': public_file_url
+        }
+
+        return jsonify(response)
 
 
 @app.route('/')

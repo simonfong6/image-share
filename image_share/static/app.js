@@ -9,7 +9,13 @@ function sendFileFromPaste() {
 function sendFileCallback(response) {
 	console.log(response);
 	var $imageUrl = $('#image-url');
-	$imageUrl.html(response);
+	response = JSON.parse(response);
+	console.log(response.url);
+
+	let a = $("<a></a>").text(response.url);
+	a.attr('href', response.url);
+	a.attr('id', 'image-url-link')
+	$imageUrl.html(a);
 }
 
 function sendFileGivenFile(file) {
